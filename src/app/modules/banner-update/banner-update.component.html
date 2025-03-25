@@ -1,1 +1,42 @@
-<p>banner-update works!</p>
+<div class="flex flex-col min-h-screen">
+    <app-navbar></app-navbar>
+
+    <div class="flex flex-1">
+        <app-sidebar></app-sidebar>
+
+        <div class="flex-1 p-6">
+            <h1 class="text-2xl font-bold mb-4">Editar Banner De Promociones</h1>
+
+            <div class="bg-gray-200 p-6 rounded-lg shadow-md">
+                <div class="mb-4">
+                    <label class="block text-gray-700">ENLACE</label>
+                    <input type="text" class="w-full p-2 border rounded bg-white">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700">Imagen</label>
+                    <div class="relative">
+                        <input type="file" class="hidden" id="image-upload-1">
+                        <label for="image-upload-1" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
+                            <span class="material-icons mr-2">image</span>
+                            <span>Seleccionar archivo</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 border rounded-lg p-4">
+                        <img src="banner-promocion.jpg" alt="Banner de Promoción" class="w-full h-auto rounded-lg">
+                        <div class="mt-2 text-center">
+                            <p class="text-sm">Por el dia del Amor y la amistad</p>
+                            <p class="text-sm">Por la compra de una pachamanca tiene un 50% de descuento en otra</p>
+                            <p class="text-xs">Fecha: 16/02</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button class="bg-gray-500 text-white px-4 py-2 rounded">CANCELAR</button>
+                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded">ACTUALIZAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

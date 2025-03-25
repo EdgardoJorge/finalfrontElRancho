@@ -15,6 +15,9 @@ import { CategoryUpdateComponent } from './category-update/category-update.compo
 import { BannerComponent } from './banner/banner.component';
 import { BannerCreateComponent } from './banner-create/banner-create.component';
 import { BannerUpdateComponent } from './banner-update/banner-update.component';
+import { ComprobantesComponent } from './comprobantes/comprobantes.component';
+import { ReportComponent } from './report/report.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { BannerUpdateComponent } from './banner-update/banner-update.component';
     CategoryUpdateComponent,
     BannerComponent,
     BannerCreateComponent,
-    BannerUpdateComponent
+    BannerUpdateComponent,
+    ComprobantesComponent,
+    ReportComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,

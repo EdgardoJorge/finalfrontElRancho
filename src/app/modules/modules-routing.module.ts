@@ -10,6 +10,10 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
 import { CategoryUpdateComponent } from './category-update/category-update.component';
 import { BannerComponent } from './banner/banner.component';
 import { BannerCreateComponent } from './banner-create/banner-create.component';
+import { BannerUpdateComponent } from './banner-update/banner-update.component';
+import { ComprobantesComponent } from './comprobantes/comprobantes.component';
+import { ReportComponent } from './report/report.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
     {
@@ -42,7 +46,7 @@ const routes: Routes = [
     },
     {
       path: 'category/update/:id',
-      component: CategoryUpdateComponent  
+      component: CategoryUpdateComponent
     },
     {
       path: 'banner',
@@ -51,6 +55,22 @@ const routes: Routes = [
     {
       path: 'banner/create',
       component: BannerCreateComponent
+    },
+    {
+      path: 'banner/update/:id',
+      component: BannerUpdateComponent
+    },
+    {
+      path: 'comprobantes',
+      component: ComprobantesComponent
+    },
+    {
+      path: 'report',
+      component: ReportComponent,
+    },
+    {
+      path: 'calendar',
+      component: CalendarComponent,
     }
 ];
 
