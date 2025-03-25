@@ -1,32 +1,39 @@
 <!-- productos.component.html -->
-<div class="flex">
-    <!-- Sidebar Component -->
-    <app-sidebar></app-sidebar>
+<div class="flex flex-col min-h-screen">
+    <!-- Navbar Component -->
+    <app-navbar></app-navbar>
 
-    <!-- Contenedor principal -->
-    <div class="flex-1">
-        <!-- Navbar Component -->
-        <app-navbar></app-navbar>
+    <!-- Contenedor flexible para Sidebar y Contenido -->
+    <div class="flex flex-1">
+        <!-- Sidebar Component -->
+        <app-sidebar></app-sidebar>
 
-        <div class="p-6">
+        <!-- Contenido principal -->
+        <div class="flex-1 p-6">
             <h1 class="text-2xl font-bold mb-4">Productos</h1>
 
             <!-- Filtros -->
             <div class="flex items-center mb-4">
                 <span class="mr-2">Productos de la tienda</span>
-                <button class="bg-[#7E493B] text-white px-3 py-1 rounded mr-2">Activo</button>
-                <button class="bg-gray-400 text-white px-3 py-1 rounded">Inactivo</button>
+                <button class="bg-[#7E493B] text-white px-3 py-1 rounded-md mr-2">Activo</button>
+                <button class="bg-gray-400 text-white px-3 py-1 rounded-md">Inactivo</button>
             </div>
 
-            <!-- Buscador y botón Agregar -->
-            <div class="flex justify-between mb-4">
-                <div class="relative">
-                    <input type="text" placeholder="Buscar..." class="p-2 pl-3 pr-10 border rounded bg-[#D9D9D9]">
+            <!-- Contenedor de buscador y botón alineados a la derecha -->
+            <div class="flex flex-col items-end mb-4">
+                <!-- Buscador -->
+                <div class="relative mb-2 max-w-xs w-full">
+                    <input type="text" placeholder="Buscar..." 
+                           class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]">
                     <span class="absolute right-3 top-2 material-icons text-gray-600">search</span>
                 </div>
-                <button class="bg-[#7E493B] text-white px-4 py-2 rounded flex items-center">
-                    Agregar <span class="material-icons ml-2">add</span>
-                </button>
+                
+                <!-- Botón Agregar -->
+                <div class="flex justify-end w-full">
+                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded flex items-center whitespace-nowrap">
+                        Agregar <span class="material-icons ml-2">add</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Tabla de productos -->

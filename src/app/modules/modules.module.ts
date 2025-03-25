@@ -7,6 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { ProductUpdateComponent } from './product-update/product-update.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryCreateComponent } from './category-create/category-create.component';
+import { CategoryUpdateComponent } from './category-update/category-update.component';
+import { BannerComponent } from './banner/banner.component';
+import { BannerCreateComponent } from './banner-create/banner-create.component';
+import { BannerUpdateComponent } from './banner-update/banner-update.component';
 
 
 @NgModule({
@@ -15,7 +23,15 @@ import { ProductsComponent } from './products/products.component';
     LoginComponent,
     SidebarComponent,
     NavbarComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductCreateComponent,
+    ProductUpdateComponent,
+    CategoryComponent,
+    CategoryCreateComponent,
+    CategoryUpdateComponent,
+    BannerComponent,
+    BannerCreateComponent,
+    BannerUpdateComponent
   ],
   imports: [
     CommonModule,
