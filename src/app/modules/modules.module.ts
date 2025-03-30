@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { ModulesRoutingModule } from './modules-routing.module';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -37,11 +37,12 @@ import { CalendarComponent } from './calendar/calendar.component';
     BannerUpdateComponent,
     ComprobantesComponent,
     ReportComponent,
-    CalendarComponent
+    CalendarComponent,
   ],
   imports: [
     CommonModule,
-    ModulesRoutingModule
+    ModulesRoutingModule,
+    FullCalendarModule
   ]
 })
 export class ModulesModule { }
