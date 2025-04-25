@@ -18,6 +18,8 @@ import { BannerUpdateComponent } from './banner-update/banner-update.component';
 import { ComprobantesComponent } from './comprobantes/comprobantes.component';
 import { ReportComponent } from './report/report.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { CalendarComponent } from './calendar/calendar.component';
   imports: [
     CommonModule,
     ModulesRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class ModulesModule { }

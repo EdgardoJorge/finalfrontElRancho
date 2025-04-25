@@ -1,40 +1,47 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <aside class="sticky top-0 w-64 bg-[#D9D9D9] text-black p-4 min-h-screen h-screen">
-    <nav>
-        <ul>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">home</span>
-                <a href="#">Inicio</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">shopping_cart</span>
-                <a href="#">Productos</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">category</span>
-                <a href="#">Categorías</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">local_offer</span>
-                <a href="#">Banners y Ofertas</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">receipt</span>
-                <a href="#">Comprobantes</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">bar_chart</span>
-                <a href="#">Informes</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">event</span>
-                <a href="#">Reservas</a>
-            </li>
-            <li class="mb-4 p-2 flex items-center rounded hover:bg-gray-400 cursor-pointer">
-                <span class="material-icons mr-2">people</span>
-                <a href="#">Clientes</a>
-            </li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/dashboard" routerLinkActive="bg-gray-400" [routerLinkActiveOptions]="{ exact: true }">
+        <span class="material-icons mr-2">home</span>
+        <a class="w-full">Inicio</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/products" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">shopping_cart</span>
+        <a class="w-full">Productos</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/category" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">category</span>
+        <a class="w-full">Categorías</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/banner" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">local_offer</span>
+        <a class="w-full">Banners y Ofertas</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/comprobantes" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">receipt</span>
+        <a class="w-full">Comprobantes</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/report" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">bar_chart</span>
+        <a class="w-full">Informes</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer"
+          routerLink="/calendar" routerLinkActive="bg-gray-400">
+        <span class="material-icons mr-2">event</span>
+        <a class="w-full">Reservas</a>
+      </li>
+      <li class="mb-4 p-2 flex items-center rounded cursor-pointer">
+        <span class="material-icons mr-2">people</span>
+        <a class="w-full">Clientes</a> <!-- Ruta pendiente -->
+      </li>
+    </ul>
+  </nav>
 </aside>

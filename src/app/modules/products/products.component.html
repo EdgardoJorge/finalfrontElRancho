@@ -52,31 +52,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center border">
-                            <td class="p-2 border">Pachamanca de Pollo</td>
-                            <td class="p-2 border">Plato Fuerte</td>
-                            <td class="p-2 border">Un plato tradicional con papas, habas y hierbas.</td>
-                            <td class="p-2 border">S/ 15.00</td>
-                            <td class="p-2 border text-blue-600 underline">S/ 10.00</td>
-                            <td class="p-2 border text-green-600">Activo</td>
-                            <td class="p-2 border"><span class="material-icons cursor-pointer">edit</span></td>
-                            <td class="p-2 border"><span class="material-icons text-red-600 cursor-pointer">visibility_off</span></td>
+                        <tr *ngFor="let producto of productos" class="text-center border">
+                          <td class="p-2 border">{{ producto.nombre }}</td>
+                          <td class="p-2 border">Plato Fuerte</td> <!-- Sustituye si tienes categoría -->
+                          <td class="p-2 border">{{ producto.descripcion }}</td>
+                          <td class="p-2 border">S/ {{ producto.precio | number:'1.2-2' }}</td>
+                          <td class="p-2 border text-blue-600 underline">S/ -</td> <!-- Reemplaza si manejas oferta -->
+                          <td class="p-2 border">
+                            <span [ngClass]="producto.activo ? 'text-green-600' : 'text-red-600'">
+                              {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                            </span>
+                          </td>
+                          <td class="p-2 border">
+                            <span class="material-icons cursor-pointer text-blue-600">edit</span>
+                          </td>
+                          <td class="p-2 border">
+                            <span class="material-icons text-red-600 cursor-pointer">visibility_off</span>
+                          </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Paginación -->
-            <div class="flex justify-center mt-4">
-                <div class="flex space-x-2">
-                    <button class="px-3 py-1 border rounded">1</button>
-                    <button class="px-3 py-1 border rounded">2</button>
-                    <button class="px-3 py-1 border rounded">3</button>
-                    <button class="px-3 py-1 border rounded">4</button>
-                    <button class="px-3 py-1 border rounded">5</button>
-                    <button class="px-3 py-1 border rounded">...</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                      </tbody>
+                      
