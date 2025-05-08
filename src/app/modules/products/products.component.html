@@ -1,74 +1,104 @@
-<!-- productos.component.html -->
 <div class="flex flex-col min-h-screen">
-    <!-- Navbar Component -->
-    <app-navbar></app-navbar>
+  <!-- Navbar Component -->
+  <app-navbar></app-navbar>
 
-    <!-- Contenedor flexible para Sidebar y Contenido -->
-    <div class="flex flex-1">
-        <!-- Sidebar Component -->
-        <app-sidebar></app-sidebar>
+  <!-- Contenedor flexible para Sidebar y Contenido -->
+  <div class="flex flex-1">
+    <!-- Sidebar Component -->
+    <app-sidebar></app-sidebar>
 
-        <!-- Contenido principal -->
-        <div class="flex-1 p-6">
-            <h1 class="text-2xl font-bold mb-4">Productos</h1>
+    <!-- Contenido principal -->
+    <div class="flex-1 p-6">
+      <h1 class="text-2xl font-bold mb-4">Productos</h1>
 
-            <!-- Filtros -->
-            <div class="flex items-center mb-4">
-                <span class="mr-2">Productos de la tienda</span>
-                <button class="bg-[#7E493B] text-white px-3 py-1 rounded-md mr-2">Activo</button>
-                <button class="bg-gray-400 text-white px-3 py-1 rounded-md">Inactivo</button>
-            </div>
+      <!-- Filtros -->
+      <div class="flex items-center mb-4">
+        <span class="mr-2">Productos de la tienda</span>
+        <button class="bg-[#7E493B] text-white px-3 py-1 rounded-md mr-2">Activo</button>
+        <button class="bg-gray-400 text-white px-3 py-1 rounded-md">Inactivo</button>
+      </div>
 
-            <!-- Contenedor de buscador y botón alineados a la derecha -->
-            <div class="flex flex-col items-end mb-4">
-                <!-- Buscador -->
-                <div class="relative mb-2 max-w-xs w-full">
-                    <input type="text" placeholder="Buscar..." 
-                           class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]">
-                    <span class="absolute right-3 top-2 material-icons text-gray-600">search</span>
-                </div>
-                
-                <!-- Botón Agregar -->
-                <div class="flex justify-end w-full">
-                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded flex items-center whitespace-nowrap">
-                        Agregar <span class="material-icons ml-2">add</span>
-                    </button>
-                </div>
-            </div>
+      <!-- Contenedor de buscador y botón alineados a la derecha -->
+      <div class="flex flex-col items-end mb-4">
+        <!-- Buscador -->
+        <div class="relative mb-2 max-w-xs w-full">
+          <input
+            type="text"
+            [(ngModel)]="criterioBusqueda"
+            (keyup.enter)="buscar()"
+            placeholder="Buscar..."
+            class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]"
+          />
+          <span
+            class="absolute right-3 top-2 material-icons text-gray-600 cursor-pointer"
+            (click)="buscar()"
+            >search</span
+          >
+        </div>
 
-            <!-- Tabla de productos -->
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-300">
-                            <th class="p-2 border">Nombre</th>
-                            <th class="p-2 border">Categoría</th>
-                            <th class="p-2 border">Descripción</th>
-                            <th class="p-2 border">Precio</th>
-                            <th class="p-2 border">Precio Oferta</th>
-                            <th class="p-2 border">Estado</th>
-                            <th class="p-2 border">Editar</th>
-                            <th class="p-2 border">Desactivar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let producto of productos" class="text-center border">
-                          <td class="p-2 border">{{ producto.nombre }}</td>
-                          <td class="p-2 border">Plato Fuerte</td> <!-- Sustituye si tienes categoría -->
-                          <td class="p-2 border">{{ producto.descripcion }}</td>
-                          <td class="p-2 border">S/ {{ producto.precio | number:'1.2-2' }}</td>
-                          <td class="p-2 border text-blue-600 underline">S/ -</td> <!-- Reemplaza si manejas oferta -->
-                          <td class="p-2 border">
-                            <span [ngClass]="producto.activo ? 'text-green-600' : 'text-red-600'">
-                              {{ producto.activo ? 'Activo' : 'Inactivo' }}
-                            </span>
-                          </td>
-                          <td class="p-2 border">
-                            <span class="material-icons cursor-pointer text-blue-600">edit</span>
-                          </td>
-                          <td class="p-2 border">
-                            <span class="material-icons text-red-600 cursor-pointer">visibility_off</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                      
+        <!-- Botón Agregar -->
+        <div class="flex justify-end w-full">
+          <button
+            class="bg-[#7E493B] text-white px-4 py-2 rounded flex items-center whitespace-nowrap"
+            [routerLink]="['/product/create']"
+          >
+            Agregar <span class="material-icons ml-2">add</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla de productos -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-300">
+              <th class="p-2 border">Nombre</th>
+              <th class="p-2 border">Categoría</th>
+              <th class="p-2 border">Descripción</th>
+              <th class="p-2 border">Precio</th>
+              <th class="p-2 border">Precio Oferta</th>
+              <th class="p-2 border">Estado</th>
+              <th class="p-2 border">Editar</th>
+              <th class="p-2 border">Desactivar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let producto of productos"
+              class="text-center border"
+            >
+              <td class="p-2 border">{{ producto.nombre }}</td>
+              <td class="p-2 border">Plato Fuerte</td>
+              <td class="p-2 border">{{ producto.descripcion }}</td>
+              <td class="p-2 border">
+                S/ {{ producto.precio | number: '1.2-2' }}
+              </td>
+              <td class="p-2 border text-blue-600 underline">S/ -</td>
+              <td class="p-2 border">
+                <span
+                  [ngClass]="producto.activo ? 'text-green-600' : 'text-red-600'"
+                >
+                  {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="p-2 border">
+                <span
+                  class="material-icons cursor-pointer text-blue-600"
+                  [routerLink]="['/product/update', producto.id]"
+                  >edit</span
+                >
+              </td>
+              <td class="p-2 border">
+                <span
+                  class="material-icons text-red-600 cursor-pointer"
+                  (click)="cambiarEstadoProducto(producto.id || 0, !producto.activo)"
+                  >visibility_off</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,7 @@ import { ReportComponent } from './report/report.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FormsModule } from '@angular/forms';
     ModulesRoutingModule,
     FullCalendarModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ModulesModule { }

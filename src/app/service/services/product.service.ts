@@ -7,7 +7,7 @@ import { environment } from '../../../enviroments/enviroments.development';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductoService {
+export class ProductService {
   private apiUrl = `${environment.backendBaseUrl}/api/Producto`;
 
   constructor(private http: HttpClient) {}
@@ -30,5 +30,17 @@ export class ProductoService {
 
   eliminarProducto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  buscarProductos(criterio: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/buscar`, {
+      params: { criterio }
+    });
+  }
+
+  // Método para subir la imagen a un servidor externo
+  subirImagen(formData: FormData): Observable<any> {
+    // Ejemplo con Cloudinary
+    const uploadUrl = 'https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload';
+    return this.http.post(uploadUrl, formData);
   }
 }

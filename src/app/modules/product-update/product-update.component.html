@@ -8,62 +8,73 @@
             <h1 class="text-2xl font-bold mb-4">Actualizar Productos</h1>
 
             <div class="bg-gray-200 p-6 rounded-lg shadow-md">
-                <div class="mb-4">
-                    <label class="block text-gray-700">Nombre</label>
-                    <input type="text" class="w-full p-2 border rounded bg-white" value="">
-                </div>
+                <form [formGroup]="productoForm" (ngSubmit)="actualizarProducto()">
 
-                <div class="mb-4">
-                    <label class="block text-gray-700">Descripción</label>
-                    <textarea class="w-full p-2 border rounded bg-white"></textarea>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Precio</label>
-                    <input type="text" class="w-full p-2 border rounded bg-white" value="">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Precio Oferta</label>
-                    <input type="text" class="w-full p-2 border rounded bg-white" value="">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Categoría</label>
-                    <select class="w-full p-2 border rounded bg-white">
-                        <option>Seleccione una categoría</option>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Estado</label>
-                    <select class="w-full p-2 border rounded bg-white">
-                        <option>Seleccione el estado</option>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Imágenes</label>
-                    <div class="relative">
-                        <input type="file" class="hidden" id="image-upload-1">
-                        <label for="image-upload-1" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
-                            <span class="material-icons mr-2">image</span>
-                            <span>Seleccionar archivo</span>
-                        </label>
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Nombre</label>
+                        <input type="text" formControlName="nombre" class="w-full p-2 border rounded bg-white" />
                     </div>
-                    <div class="relative mt-2">
-                        <input type="file" class="hidden" id="image-upload-2">
-                        <label for="image-upload-2" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
-                            <span class="material-icons mr-2">image</span>
-                            <span>Seleccionar archivo</span>
-                        </label>
-                    </div>
-                </div>
 
-                <div class="flex justify-end space-x-4">
-                    <button class="bg-gray-500 text-white px-4 py-2 rounded">Cancelar</button>
-                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded">Actualizar</button>
-                </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Descripción</label>
+                        <textarea formControlName="descripcion" class="w-full p-2 border rounded bg-white"></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Precio</label>
+                        <input type="number" formControlName="precio" class="w-full p-2 border rounded bg-white" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Precio Oferta</label>
+                        <input type="number" formControlName="precioOferta" class="w-full p-2 border rounded bg-white" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Categoría</label>
+                        <select formControlName="categoria" class="w-full p-2 border rounded bg-white">
+                            <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Estado</label>
+                        <select formControlName="activo" class="w-full p-2 border rounded bg-white">
+                            <option [value]="true">Activo</option>
+                            <option [value]="false">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Imágenes</label>
+                        <div class="relative">
+                            <input type="file" class="hidden" id="image-upload-1" (change)="onImageSelected($event, 1)">
+                            <label for="image-upload-1"
+                                   class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
+                                <span class="material-icons mr-2">image</span>
+                                <span>Seleccionar archivo</span>
+                            </label>
+                        </div>
+                        <div class="relative mt-2">
+                            <input type="file" class="hidden" id="image-upload-2" (change)="onImageSelected($event, 2)">
+                            <label for="image-upload-2"
+                                   class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
+                                <span class="material-icons mr-2">image</span>
+                                <span>Seleccionar archivo</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" (click)="cancelar()" class="bg-gray-500 text-white px-4 py-2 rounded">
+                            Cancelar
+                        </button>
+                        <button type="submit" [disabled]="productoForm.invalid"
+                                class="bg-[#7E493B] text-white px-4 py-2 rounded">
+                            Actualizar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
