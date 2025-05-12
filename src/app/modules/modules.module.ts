@@ -21,6 +21,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ]
 })
 export class ModulesModule { }

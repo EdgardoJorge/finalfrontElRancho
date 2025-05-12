@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../service/services/product.service';
 import { Producto } from '../../service/models/ProductModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-update',
@@ -30,7 +31,8 @@ export class ProductUpdateComponent implements OnInit {
     private productoService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +56,6 @@ export class ProductUpdateComponent implements OnInit {
       this.producto = producto;
       this.productoForm.patchValue(producto);
       this.imagenUrl1 = producto.imagen || '';
-      // Si tienes segunda imagen, agrégala aquí
     });
   }
 
@@ -72,14 +73,18 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   subirImagen(file: File, imagenNumero: number): void {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    this.productoService.subirImagen(formData).subscribe((response: any) => {
-      if (imagenNumero === 1) {
-        this.imagenUrl1 = response.url;
-      } else {
-        this.imagenUrl2 = response.url;
+    this.productoService.subirImagen(file).subscribe({
+      next: (response: any) => {
+        const url = response.data?.url;
+        if (imagenNumero === 1) {
+          this.imagenUrl1 = url;
+        } else {
+          this.imagenUrl2 = url;
+        }
+      },
+      error: err => {
+        console.error('Error al subir imagen a ImgBB', err);
+        this.snackBar.open('Error al subir imagen', 'Cerrar', { duration: 3000 });
       }
     });
   }
@@ -90,16 +95,23 @@ export class ProductUpdateComponent implements OnInit {
         ...this.producto,
         ...this.productoForm.value,
         imagen: this.imagenUrl1 || this.producto.imagen
-        // puedes añadir imagen2 si tu modelo lo soporta
       };
 
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
         this.productoService.actualizarProducto(+id, updatedProduct).subscribe({
-          next: () => this.router.navigate(['/products']),
-          error: (err: any) => console.error('Error al actualizar producto', err)
+          next: () => {
+            this.snackBar.open('Producto actualizado correctamente', 'Cerrar', { duration: 3000 });
+            this.router.navigate(['/products']);
+          },
+          error: err => {
+            console.error('Error al actualizar producto', err);
+            this.snackBar.open('Error al actualizar el producto', 'Cerrar', { duration: 3000 });
+          }
         });
       }
+    } else {
+      this.snackBar.open('Formulario inválido. Revisa los campos.', 'Cerrar', { duration: 3000 });
     }
   }
 
