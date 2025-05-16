@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../service/services/product.service';
+import { CategoryService } from '../../service/services/category.service';
 import { Producto } from '../../service/models/ProductModel';
+import { Categoria } from '../../service/models/CategoryModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -21,14 +23,11 @@ export class ProductUpdateComponent implements OnInit {
   imagenUrl1: string = '';
   imagenUrl2: string = '';
 
-  categorias = [
-    { id: 1, nombre: 'Carnes' },
-    { id: 2, nombre: 'Bebidas' },
-    { id: 3, nombre: 'Postres' }
-  ];
+  categorias: Categoria[] = [];
 
   constructor(
     private productoService: ProductService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
@@ -45,10 +44,24 @@ export class ProductUpdateComponent implements OnInit {
       activo: [true, Validators.required]
     });
 
+    this.obtenerCategorias();
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.obtenerProducto(id);
     }
+  }
+
+  obtenerCategorias(): void {
+    this.categoryService.obtenerCategorias().subscribe({
+      next: (categorias) => {
+        this.categorias = categorias;
+      },
+      error: err => {
+        console.error('Error al cargar categorías', err);
+        this.snackBar.open('Error al cargar las categorías', 'Cerrar', { duration: 3000 });
+      }
+    });
   }
 
   obtenerProducto(id: string): void {
