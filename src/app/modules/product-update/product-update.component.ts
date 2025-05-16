@@ -40,7 +40,7 @@ export class ProductUpdateComponent implements OnInit {
       descripcion: ['', Validators.required],
       precio: ['', [Validators.required, Validators.min(0)]],
       precioOferta: ['', [Validators.min(0)]],
-      categoria: [null, Validators.required],
+      idCategoria: [null, Validators.required],
       activo: [true, Validators.required]
     });
 

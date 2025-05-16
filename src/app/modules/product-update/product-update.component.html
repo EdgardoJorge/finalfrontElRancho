@@ -48,7 +48,7 @@
                     class="w-full p-2 border rounded bg-white"
                     [ngClass]="{ 'border-red-500': productoForm.get('categoria')?.invalid && productoForm.get('categoria')?.touched }">
               <option value="" disabled>Seleccione una categoría</option>
-              <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+              <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.categoriaNombre }}</option>
             </select>
           </div>
 

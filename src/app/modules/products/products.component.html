@@ -1,26 +1,39 @@
 <div class="flex flex-col min-h-screen">
-  <!-- Navbar Component -->
   <app-navbar></app-navbar>
 
-  <!-- Contenedor flexible para Sidebar y Contenido -->
   <div class="flex flex-1">
-    <!-- Sidebar Component -->
     <app-sidebar></app-sidebar>
-
-    <!-- Contenido principal -->
     <div class="flex-1 p-6">
       <h1 class="text-2xl font-bold mb-4">Productos</h1>
 
-      <!-- Filtros -->
-      <div class="flex items-center mb-4">
-        <span class="mr-2">Productos de la tienda</span>
-        <button class="bg-[#7E493B] text-white px-3 py-1 rounded-md mr-2">Activo</button>
-        <button class="bg-gray-400 text-white px-3 py-1 rounded-md">Inactivo</button>
+      <!-- Filtros de estado -->
+      <div class="flex items-center mb-4 flex-wrap gap-2">
+        <span class="mr-2">Productos de la tienda:</span>
+        <button
+          class="px-3 py-1 rounded-md"
+          [ngClass]="estadoFiltro === 'todos' ? 'bg-[#7E493B] text-white' : 'bg-gray-200 text-black'"
+          (click)="filtrarPorEstado('todos')"
+        >
+          Todos
+        </button>
+        <button
+          class="px-3 py-1 rounded-md"
+          [ngClass]="estadoFiltro === 'activos' ? 'bg-[#7E493B] text-white' : 'bg-gray-200 text-black'"
+          (click)="filtrarPorEstado('activos')"
+        >
+          Activo
+        </button>
+        <button
+          class="px-3 py-1 rounded-md"
+          [ngClass]="estadoFiltro === 'inactivos' ? 'bg-[#7E493B] text-white' : 'bg-gray-200 text-black'"
+          (click)="filtrarPorEstado('inactivos')"
+        >
+          Inactivo
+        </button>
       </div>
 
-      <!-- Contenedor de buscador y botón alineados a la derecha -->
+      <!-- Contenedor de buscador y botón -->
       <div class="flex flex-col items-end mb-4">
-        <!-- Buscador -->
         <div class="relative mb-2 max-w-xs w-full">
           <input
             type="text"
@@ -63,21 +76,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let producto of productos"
-              class="text-center border"
-            >
+            <tr *ngFor="let producto of productos" class="text-center border">
               <td class="p-2 border">{{ producto.nombre }}</td>
-              <td class="p-2 border">Plato Fuerte</td>
+              <td class="p-2 border">{{ obtenerNombreCategoria(producto.idCategoria) }}</td>
               <td class="p-2 border">{{ producto.descripcion }}</td>
               <td class="p-2 border">
                 S/ {{ producto.precio | number: '1.2-2' }}
               </td>
               <td class="p-2 border text-blue-600 underline">S/ -</td>
               <td class="p-2 border">
-                <span
-                  [ngClass]="producto.activo ? 'text-green-600' : 'text-red-600'"
-                >
+                <span [ngClass]="producto.activo ? 'text-green-600' : 'text-red-600'">
                   {{ producto.activo ? 'Activo' : 'Inactivo' }}
                 </span>
               </td>
