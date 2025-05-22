@@ -22,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteCreateComponent } from './cliente-create/cliente-create.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ComprobantesComponent,
     ReportComponent,
     CalendarComponent,
+    ClienteComponent,
+    ClienteCreateComponent,
   ],
   imports: [
     CommonModule,

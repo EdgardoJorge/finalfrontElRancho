@@ -1,0 +1,81 @@
+<div class="flex flex-col min-h-screen">
+  <app-navbar></app-navbar>
+
+  <div class="flex flex-1">
+    <app-sidebar></app-sidebar>
+    <div class="flex-1 p-6">
+      <h1 class="text-2xl font-bold mb-4">Clientes</h1>
+
+      <!-- Buscador y botón agregar -->
+      <div class="flex flex-col items-end mb-4">
+        <div class="relative mb-2 max-w-xs w-full">
+          <input
+            type="text"
+            [(ngModel)]="criterioBusqueda"
+            (keyup.enter)="buscar()"
+            placeholder="Buscar cliente..."
+            class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]"
+          />
+          <span
+            class="absolute right-3 top-2 material-icons text-gray-600 cursor-pointer"
+            (click)="buscar()"
+            >search</span
+          >
+        </div>
+
+        <div class="flex justify-end w-full">
+          <button
+            class="bg-[#7E493B] text-white px-4 py-2 rounded flex items-center"
+            [routerLink]="['/cliente/create']"
+          >
+            Agregar <span class="material-icons ml-2">add</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla de clientes -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-[#7E493B] text-white">
+              <th class="p-2 border">Nombre</th>
+              <th class="p-2 border">apellidoPaterno</th>
+              <th class="p-2 border">apellidoMaterno</th>
+              <th class="p-2 border">DNI</th>
+              <th class="p-2 border">RUC</th>
+              <th class="p-2 border">Teléfono</th>
+              <th class="p-2 border">Teléfono fijo</th>
+              <th class="p-2 border">Correo</th>
+              <th class="p-2 border">Dirección</th>
+              <th class="p-2 border">CodigoPostal</th>
+              <th class="p-2 border">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cliente of clientesFiltrados" class="text-center border">
+              <td class="p-2 border">{{ cliente.nombres }}</td>
+                <td class="p-2 border">{{ cliente.apellidoPaterno }}</td>
+                <td class="p-2 border">{{ cliente.apellidoMaterno }}</td>
+              <td class="p-2 border">{{ cliente.dni }}</td>
+              <td class="p-2 border">{{ cliente.ruc }}</td>
+                <td class="p-2 border">{{ cliente.telefonoFijo}}</td>
+              <td class="p-2 border">{{ cliente.telefonoMovil }}</td>
+              <td class="p-2 border">{{ cliente.correoElectronico }}</td>
+              <td class="p-2 border">{{ cliente.direccion }}</td>
+              <td class="p-2 border">{{ cliente.codigoPostal }}</td>
+              <td class="p-2 border">
+                <span
+                  class="material-icons cursor-pointer text-blue-600"
+                  [routerLink]="['/cliente/update', cliente.id]"
+                >
+                  edit
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

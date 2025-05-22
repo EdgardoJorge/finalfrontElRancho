@@ -14,6 +14,8 @@ import { BannerUpdateComponent } from './banner-update/banner-update.component';
 import { ComprobantesComponent } from './comprobantes/comprobantes.component';
 import { ReportComponent } from './report/report.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteCreateComponent } from './cliente-create/cliente-create.component';
 
 const routes: Routes = [
     {
@@ -66,11 +68,19 @@ const routes: Routes = [
     },
     {
       path: 'report',
-      component: ReportComponent,
+      component: ReportComponent
     },
     {
       path: 'calendar',
-      component: CalendarComponent,
+      component: CalendarComponent
+    },
+    {
+      path: 'cliente',
+      component: ClienteComponent
+    },
+    {
+      path: 'cliente/create',
+      component: ClienteCreateComponent
     }
 ];
 
