@@ -25,32 +25,36 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    LoginComponent,
-    SidebarComponent,
+    declarations: [
+        IndexComponent,
+        LoginComponent,
+        SidebarComponent,
+        NavbarComponent,
+        ProductsComponent,
+        ProductCreateComponent,
+        ProductUpdateComponent,
+        CategoryComponent,
+        CategoryCreateComponent,
+        CategoryUpdateComponent,
+        BannerComponent,
+        BannerCreateComponent,
+        BannerUpdateComponent,
+        ComprobantesComponent,
+        ReportComponent,
+        CalendarComponent,
+    ],
+  exports: [
     NavbarComponent,
-    ProductsComponent,
-    ProductCreateComponent,
-    ProductUpdateComponent,
-    CategoryComponent,
-    CategoryCreateComponent,
-    CategoryUpdateComponent,
-    BannerComponent,
-    BannerCreateComponent,
-    BannerUpdateComponent,
-    ComprobantesComponent,
-    ReportComponent,
-    CalendarComponent,
+    SidebarComponent
   ],
-  imports: [
-    CommonModule,
-    ModulesRoutingModule,
-    FullCalendarModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSnackBarModule
-  ]
+    imports: [
+        CommonModule,
+        ModulesRoutingModule,
+        FullCalendarModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSnackBarModule
+    ]
 })
 export class ModulesModule { }

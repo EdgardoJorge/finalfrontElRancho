@@ -1,63 +1,62 @@
 <div class="flex flex-col min-h-screen">
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 
-    <div class="flex flex-1">
-        <app-sidebar></app-sidebar>
+  <div class="flex flex-1">
+    <app-sidebar></app-sidebar>
 
-        <div class="flex-1 p-6">
-            <h1 class="text-2xl font-bold mb-4">Crear Productos</h1>
+    <div class="flex-1 p-6">
+      <h1 class="text-2xl font-bold mb-4">Crear Productos</h1>
 
-            <div class="bg-gray-300 p-6 rounded-lg shadow-md w-3/4 mx-auto">
-                <div class="mb-4">
-                    <label class="block text-gray-700">Nombre</label>
-                    <input type="text" class="w-full p-2 border rounded bg-gray-200">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Descripción</label>
-                    <textarea class="w-full p-2 border rounded bg-gray-200"></textarea>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Precio</label>
-                    <input type="text" class="w-full p-2 border rounded bg-gray-200">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Precio Oferta</label>
-                    <input type="text" class="w-full p-2 border rounded bg-gray-200">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Categoría</label>
-                    <select class="w-full p-2 border rounded bg-gray-200">
-                        <option>Seleccione una categoría</option>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700">Imágenes</label>
-                    <div class="relative">
-                        <input type="file" class="hidden" id="image-upload-1">
-                        <label for="image-upload-1" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center mb-2">
-                            <span class="material-icons mr-2">image</span>
-                            <span>Seleccionar archivo</span>
-                        </label>
-                    </div>
-                    <div class="relative">
-                        <input type="file" class="hidden" id="image-upload-2">
-                        <label for="image-upload-2" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
-                            <span class="material-icons mr-2">image</span>
-                            <span>Seleccionar archivo</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="flex justify-end space-x-4">
-                    <button class="bg-gray-500 text-white px-4 py-2 rounded">Cancelar</button>
-                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded">Agregar</button>
-                </div>
-            </div>
+      <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="bg-gray-300 p-6 rounded-lg shadow-md w-3/4 mx-auto">
+        <div class="mb-4">
+          <label class="block text-gray-700">Nombre</label>
+          <input type="text" formControlName="nombre" class="w-full p-2 border rounded bg-gray-200">
         </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Descripción</label>
+          <textarea formControlName="descripcion" class="w-full p-2 border rounded bg-gray-200"></textarea>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Precio</label>
+          <input type="text" formControlName="precio" class="w-full p-2 border rounded bg-gray-200">
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Precio Oferta</label>
+          <input type="text" formControlName="precioOferta" class="w-full p-2 border rounded bg-gray-200">
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Categoría</label>
+          <select formControlName="categoriaId" class="w-full p-2 border rounded bg-gray-200">
+            <option value="">Seleccione una categoría</option>
+            <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.categoriaNombre }}</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700">Imagen 1</label>
+          <input type="file" id="image-upload-1" (change)="onFileChange($event, 1)" hidden>
+          <label for="image-upload-1" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center mb-2">
+            <span class="material-icons mr-2">image</span>
+            <span>Seleccionar archivo</span>
+          </label>
+
+          <label class="block text-gray-700 mt-2">Imagen 2</label>
+          <input type="file" id="image-upload-2" (change)="onFileChange($event, 2)" hidden>
+          <label for="image-upload-2" class="w-full p-2 border rounded bg-[#7E493B] text-white text-center cursor-pointer flex items-center justify-center">
+            <span class="material-icons mr-2">image</span>
+            <span>Seleccionar archivo</span>
+          </label>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded" (click)="router.navigate(['/productos'])">Cancelar</button>
+          <button type="submit" class="bg-[#7E493B] text-white px-4 py-2 rounded" [disabled]="productoForm.invalid">Agregar</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
