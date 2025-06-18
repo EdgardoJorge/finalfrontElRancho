@@ -34,9 +34,9 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  buscarProductos(criterio: string): Observable<Producto[]> {
+  buscarProductos(nombre: string): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.apiUrl}/buscar`, {
-      params: { criterio }
+      params: { nombre }
     });
   }
 

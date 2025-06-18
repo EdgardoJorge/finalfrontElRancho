@@ -22,6 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { CustomersComponent } from './customers/customers.component';
+import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ComprobantesComponent,
         ReportComponent,
         CalendarComponent,
+        CustomersComponent,
+        CreateDeliveryComponent,
+        DeliveryComponent,
     ],
   exports: [
     NavbarComponent,

@@ -12,20 +12,36 @@
       <h1 class="text-2xl font-bold mb-4">Productos</h1>
 
       <!-- Filtros -->
-      <div class="flex items-center mb-4">
-        <span class="mr-2">Productos de la tienda</span>
-        <button class="bg-[#7E493B] text-white px-3 py-1 rounded-md mr-2">Activo</button>
-        <button class="bg-gray-400 text-white px-3 py-1 rounded-md">Inactivo</button>
-      </div>
+      <div class="flex items-center mb-4 space-x-2">
+  <span>Filtrar:</span>
+  <button 
+    (click)="estadoFiltro = 'activos'" 
+    [ngClass]="{ 'bg-[#7E493B]': estadoFiltro === 'activos', 'bg-gray-400': estadoFiltro !== 'activos' }"
+    class="px-3 py-1 rounded-md text-white"
+  >Activo</button>
+
+  <button 
+    (click)="estadoFiltro = 'inactivos'"
+    [ngClass]="{ 'bg-[#7E493B]': estadoFiltro === 'inactivos', 'bg-gray-400': estadoFiltro !== 'inactivos' }"
+    class="px-3 py-1 rounded-md text-white"
+  >Inactivo</button>
+
+  <button 
+    (click)="estadoFiltro = 'todos'"
+    [ngClass]="{ 'bg-[#7E493B]': estadoFiltro === 'todos', 'bg-gray-400': estadoFiltro !== 'todos' }"
+    class="px-3 py-1 rounded-md text-white"
+  >Todos</button>
+</div>
+
 
       <!-- Contenedor de buscador y botón alineados a la derecha -->
       <div class="flex flex-col items-end mb-4">
         <!-- Buscador -->
         <div class="relative mb-2 max-w-xs w-full">
           <input
+           [(ngModel)]="criterioBusqueda"
+           (keyup.enter)="buscar()"
             type="text"
-            [(ngModel)]="criterioBusqueda"
-            (keyup.enter)="buscar()"
             placeholder="Buscar..."
             class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]"
           />
@@ -64,11 +80,13 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let producto of productos"
+              *ngFor="let producto of Productos"
               class="text-center border"
             >
               <td class="p-2 border">{{ producto.nombre }}</td>
-              <td class="p-2 border">Plato Fuerte</td>
+                            <!-- ...existing code... -->
+              <td class="p-2 border">{{ obtenerNombreCategoria(producto.idCategoria) }}</td>
+              <!-- ...existing code... -->
               <td class="p-2 border">{{ producto.descripcion }}</td>
               <td class="p-2 border">
                 S/ {{ producto.precio | number: '1.2-2' }}
@@ -89,12 +107,14 @@
                 >
               </td>
               <td class="p-2 border">
-                <span
-                  class="material-icons text-red-600 cursor-pointer"
-                  (click)="cambiarEstadoProducto(producto.id || 0, !producto.activo)"
-                  >visibility_off</span
-                >
-              </td>
+              <span
+                class="material-icons cursor-pointer"
+                [ngClass]="producto.activo ? 'text-red-600' : 'text-green-600'"
+                (click)="alternarEstado(producto)"
+              >
+                {{ producto.activo ? 'visibility_off' : 'visibility' }}
+              </span>
+            </td>
             </tr>
           </tbody>
         </table>
