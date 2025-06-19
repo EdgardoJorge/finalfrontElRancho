@@ -1,71 +1,85 @@
 <div class="flex flex-col min-h-screen">
+    <!-- Navbar Component -->
     <app-navbar></app-navbar>
-
+  
+    <!-- Contenedor flexible para Sidebar y Contenido -->
     <div class="flex flex-1">
-        <app-sidebar></app-sidebar>
-
-        <div class="flex-1 p-6">
-            <h1 class="text-2xl font-bold mb-4">Empleados</h1>
-
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold">Categorías de la tienda</h2>
-                <div class="flex items-center space-x-2">
-                    <input type="text" placeholder="Buscar..." class="bg-white text-black p-2 rounded">
-                    <button class="bg-[#7E493B] text-white px-4 py-2 rounded">
-                        Agregar +
-                    </button>
-                </div>
-            </div>
-
-            <table class="w-full bg-white rounded-lg shadow-md">
-                <thead>
-                <tr class="bg-gray-100">
-                    <th class="p-2 text-left">NOMBRE</th>
-                    <th class="p-2 text-left">IMAGEN</th>
-                    <th class="p-2 text-left">EDITAR</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Ejemplo de categorías estáticas -->
-                <tr class="border-b">
-                    <td class="p-2">Ejemplo Categoría 1</td>
-                    <td class="p-2">
-                        <img src="ruta/imagen1.jpg" alt="Ejemplo Categoría 1" class="h-16" />
-                    </td>
-                    <td class="p-2">
-                        <span class="material-icons cursor-pointer">edit</span>
-                    </td>
-                </tr>
-                <tr class="border-b">
-                    <td class="p-2">Ejemplo Categoría 2</td>
-                    <td class="p-2">
-                        <img src="ruta/imagen2.jpg" alt="Ejemplo Categoría 2" class="h-16" />
-                    </td>
-                    <td class="p-2">
-                        <span class="material-icons cursor-pointer">edit</span>
-                    </td>
-                </tr>
-                <!-- Puedes agregar más filas estáticas aquí -->
-                </tbody>
-            </table>
-
-            <div class="flex justify-center mt-4">
-                <nav>
-                    <ul class="flex space-x-2">
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">1</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">2</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">3</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">4</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">5</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">6</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">7</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">8</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">9</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">10</a></li>
-                        <li><a href="#" class="px-3 py-1 rounded bg-gray-200">11</a></li>
-                    </ul>
-                </nav>
-            </div>
+      <!-- Sidebar Component -->
+      <app-sidebar></app-sidebar>
+  
+      <!-- Contenido principal -->
+      <div class="flex-1 p-6">
+        <h1 class="text-2xl font-bold mb-4">Empleados</h1>
+  
+        <!-- Filtros -->
+        <div class="flex items-center mb-4 space-x-2">
+    
+          <span>Filtrar:</span>
+          <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+              Activo
+          </button>
+          <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+            Inactivo
+          </button>
+          <div class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+            Todo
+          </div>
         </div>
+  
+  
+        <!-- Contenedor de buscador y botón alineados a la derecha -->
+        <div class="flex flex-col items-end mb-4">
+          <!-- Buscador -->
+          <div class="relative mb-2 max-w-xs w-full">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]"
+            />
+            <span
+              class="absolute right-3 top-2 material-icons text-gray-600 cursor-pointer"
+              >search</span
+            >
+          </div>
+          <button class="bg-[#7E493B] text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
+            Agregar<span class="material-icons ml-2"
+              routerLink="/employees/create"
+            >add</span>
+          </button>
+        </div>
+  
+        <!-- Tabla de productos -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-black">
+            <thead>
+              <tr class="bg-[#7E493B] text-white">
+                <th class="p-2 border">Id</th>
+                <th class="p-2 border">Nombres</th>
+                <th class="p-2 border">A. Paterno</th>
+                <th class="p-2 border">A. Materno</th>
+                <th class="p-2 border">Movil</th>
+                <th class="p-2 border">Correo</th>
+                <th class="p-2 border">cargo</th>
+                <th class="p-2 border">editar</th>
+                <th class="p-2 border">cliente Activo</th>                
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center border">
+                <td class="p-2 border">1</td>
+                <td class="p-2 border">Juan Pablo</td>
+                <td class="p-2 border">Perez</td>
+                <td class="p-2 border">Escobar</td>
+                <td class="p-2 border text-blue-600 underline">999 363 733</td>
+                <td class="p-2 border">jdiejdieijd&#64;gmail.com</td>
+                <td class="p-2 border">vendedor</td>
+                <td class="p-2 border"><span class="material-icons text-[#7E493B] cursor-pointer">edit</span></td>
+                <td class="p-2 border"><span class="material-icons text-green-500 cursor-pointer">visibility</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  

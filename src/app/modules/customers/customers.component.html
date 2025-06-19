@@ -15,18 +15,16 @@
       <div class="flex items-center mb-4 space-x-2">
   
         <span>Filtrar:</span>
-  <button 
-    class="px-3 py-1 rounded-md text-white"
-  >Activo</button>
-
-  <button 
-    class="px-3 py-1 rounded-md text-white"
-  >Inactivo</button>
-
-  <button 
-    class="px-3 py-1 rounded-md text-white"
-  >Todos</button>
-</div>
+        <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg">
+            Activo
+        </button>
+        <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg">
+          Inactivo
+        </button>
+        <div class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg">
+          Todo
+        </div>
+      </div>
 
 
       <!-- Contenedor de buscador y botón alineados a la derecha -->
@@ -47,15 +45,16 @@
 
       <!-- Tabla de productos -->
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-gray-300">
+        <table class="w-full border-collapse border border-black">
           <thead>
-            <tr class="bg-gray-300">
+            <tr class="bg-[#7E493B] text-white">
               <th class="p-2 border">Id</th>
               <th class="p-2 border">Nombres</th>
               <th class="p-2 border">A. Paterno</th>
               <th class="p-2 border">A. Materno</th>
               <th class="p-2 border">Movil</th>
               <th class="p-2 border">Correo</th>
+              <th class="p-2 border">cliente Activo</th>
               <th class="p-2 border">Historial de compras</th>
             </tr>
           </thead>
@@ -67,6 +66,7 @@
               <td class="p-2 border">Escobar</td>
               <td class="p-2 border text-blue-600 underline">999 363 733</td>
               <td class="p-2 border">jdiejdieijd&#64;gmail.com</td>
+              <td class="p-2 border"><span class="material-icons text-green-500">visibility</span></td>
               <td class="p-2 border"><span class="material-icons cursor-pointer text-amber-900">open_in_new</span></td>
             </tr>
           </tbody>
