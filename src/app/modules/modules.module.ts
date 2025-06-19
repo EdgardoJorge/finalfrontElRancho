@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ModulesRoutingModule } from './modules-routing.module';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -64,7 +65,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        NgApexchartsModule,
     ]
 })
 export class ModulesModule { }

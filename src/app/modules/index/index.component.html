@@ -5,7 +5,14 @@
         <div class="grid grid-cols-2 gap-6">
             <div class="bg-white p-4 rounded shadow">
                 <h2 class="text-lg font-bold mb-2">Platos que se consumen en un día</h2>
-                <img src="/assets/grafico.png" alt="Gráfico" class="w-full h-auto">
+                <div style="text-align:center">
+                <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [xaxis]="chartOptions.xaxis"
+                    [title]="chartOptions.title"
+                ></apx-chart>
+                </div>
             </div>
             <div class="bg-white p-4 rounded shadow">
                 <h2 class="text-lg font-bold mb-2">Producto Más Vendido del Mes</h2>
