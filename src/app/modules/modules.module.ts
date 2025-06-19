@@ -25,6 +25,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { CustomersComponent } from './customers/customers.component';
 import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { UserComponent } from './user/user.component';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { DeliveryComponent } from './delivery/delivery.component';
         CustomersComponent,
         CreateDeliveryComponent,
         DeliveryComponent,
+        UserComponent,
+        UserCreateComponent,
     ],
   exports: [
     NavbarComponent,

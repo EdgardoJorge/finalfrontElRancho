@@ -17,6 +17,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CustomersComponent } from './customers/customers.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
     {
@@ -86,6 +87,10 @@ const routes: Routes = [
     {
       path: 'employees/create',
       component: CreateDeliveryComponent,
+    },
+    {
+      path: 'user',
+      component: UserComponent
     }
 ];
 
