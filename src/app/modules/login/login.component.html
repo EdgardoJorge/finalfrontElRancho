@@ -1,5 +1,8 @@
 <div class="h-screen flex items-center justify-center bg-[#D9D9D9]">
     <div class="bg-white p-8 rounded shadow-lg w-96">
+      <div class="flex justify-center w-full">
+        <img src="assets/logo/logo.png" alt="Logo" class="mb-4 h-11" draggable="false">
+      </div>
       <h2 class="text-2xl font-bold mb-4 text-center">Iniciar Sesión</h2>
       <form (ngSubmit)="login()">
         <div class="mb-4">
@@ -24,7 +27,7 @@
         </div>
         <button
           type="submit"
-          class="w-full bg-[#7E493B] text-white p-2 rounded-lg"
+          class="w-full bg-[#7E493B] text-white p-2 rounded-lg cursor-pointer"
         >
           Ingresar
         </button>
