@@ -28,6 +28,7 @@ import { CreateDeliveryComponent } from './create-delivery/create-delivery.compo
 import { DeliveryComponent } from './delivery/delivery.component';
 import { UserComponent } from './user/user.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.component'
 
 
 @NgModule({
@@ -53,11 +54,12 @@ import { UserCreateComponent } from './user-create/user-create.component';
         DeliveryComponent,
         UserComponent,
         UserCreateComponent,
+        PosIndexSelesComponent,
     ],
-  exports: [
-    NavbarComponent,
-    SidebarComponent
-  ],
+    exports: [
+        NavbarComponent,
+        SidebarComponent
+    ],
     imports: [
         CommonModule,
         ModulesRoutingModule,

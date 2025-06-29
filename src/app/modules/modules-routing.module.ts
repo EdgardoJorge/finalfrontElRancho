@@ -18,6 +18,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
 import { UserComponent } from './user/user.component';
+import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.component';
 
 const routes: Routes = [
     {
@@ -91,6 +92,10 @@ const routes: Routes = [
     {
       path: 'user',
       component: UserComponent
+    },
+    {
+      path: 'pos',
+      component: PosIndexSelesComponent
     }
 ];
 
