@@ -9,10 +9,30 @@
 
             <div class="bg-gray-200 p-6 rounded-lg shadow-md">
                 <div class="mb-4">
-                    <label class="block text-gray-700">ENLACE</label>
-                    <input type="text" class="w-full p-2 border rounded bg-white">
+                    <label class="block text-gray-700">producto</label>
+                    <select name="Seleccione su producto" id="sele" class="w-full bg-white border rounded-md h-10 pl-4">
+                        <option value="plato fuerte" class="mr-1.5">pachamanca de pollo</option>
+                        <option value="plato fuerte" class="mr-1.5">pachamanca de cordero</option>
+                        <option value="plato fuerte" class="mr-1.5">caldo de gallina</option>
+                    </select>
                 </div>
-
+                <div>
+                    <label class="block text-gray-700">Terminos y condiciones de la promocion</label>
+                    <textarea class="w-full bg-white border border-black rounded-md rows-5" ></textarea>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Fechas</label>
+                    <div class="flex space-x-4">
+                        <div class="flex-1">
+                            <label>Fecha de inicio</label> <br>
+                            <input type="date" class="bg-white rounded-md w-full">
+                        </div>
+                        <div class="flex-1">
+                            <label>Fecha de fin</label><br>
+                            <input type="date" class="bg-white rounded-md w-full">
+                        </div>
+                    </div>
+                </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Imagen</label>
                     <div class="relative">

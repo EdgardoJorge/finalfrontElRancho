@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ModulesRoutingModule } from './modules-routing.module';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { CustomersComponent } from './customers/customers.component';
+import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { UserComponent } from './user/user.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.component'
 
 
 @NgModule({
@@ -42,11 +49,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ComprobantesComponent,
         ReportComponent,
         CalendarComponent,
+        CustomersComponent,
+        CreateDeliveryComponent,
+        DeliveryComponent,
+        UserComponent,
+        UserCreateComponent,
+        PosIndexSelesComponent,
     ],
-  exports: [
-    NavbarComponent,
-    SidebarComponent
-  ],
+    exports: [
+        NavbarComponent,
+        SidebarComponent
+    ],
     imports: [
         CommonModule,
         ModulesRoutingModule,
@@ -54,7 +67,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        NgApexchartsModule,
     ]
 })
 export class ModulesModule { }

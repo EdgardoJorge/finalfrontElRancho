@@ -2,15 +2,48 @@
 <div class="flex h-screen">
     <app-sidebar></app-sidebar>
     <main class="flex-1 p-6">
-        <div class="grid grid-cols-2 gap-6">
-            <div class="bg-white p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-2">Platos que se consumen en un día</h2>
-                <img src="/assets/grafico.png" alt="Gráfico" class="w-full h-auto">
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="text-gray-500 text-sm">Ventas Totales</h3>
+                <p class="text-2xl font-bold">S/. {{totalSales}}</p>
             </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h2 class="text-lg font-bold mb-2">Producto Más Vendido del Mes</h2>
-                <p><strong>Pachamanca de Pollo</strong></p>
-                <p><strong>Cantidad:</strong> --</p>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="text-gray-500 text-sm">Ticket Promedio</h3>
+                <p class="text-2xl font-bold">S/. {{averageTicket}}</p> 
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="text-gray-500 text-sm">Órdenes Hoy</h3>
+                <p class="text-2xl font-bold">{{ordersToday}}</p>
+                <span class="text-blue-500 text-sm">En curso</span>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-2">Tendencia de Ventas</h2>
+                <div style="text-align:center">
+                    <apx-chart
+                        [series]="chartOptions.series"
+                        [chart]="chartOptions.chart"
+                        [xaxis]="chartOptions.xaxis"
+                        [title]="chartOptions.title"
+                        [tooltip]="chartOptions.tooltip"
+                        [theme]="chartOptions.theme"
+                    ></apx-chart>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h2 class="text-lg font-bold mb-2">Productos más Vendidos</h2>
+                <div style="text-align:center">
+                    <apx-chart
+                        [series]="pieChartOptions.series"
+                        [chart]="pieChartOptions.chart"
+                        [title]="pieChartOptions.title"
+                        [labels]="pieChartOptions.labels"
+                    ></apx-chart>
+                </div>
             </div>
         </div>
     </main>

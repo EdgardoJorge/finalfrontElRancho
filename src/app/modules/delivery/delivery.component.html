@@ -1,0 +1,85 @@
+<div class="flex flex-col min-h-screen">
+    <!-- Navbar Component -->
+    <app-navbar></app-navbar>
+  
+    <!-- Contenedor flexible para Sidebar y Contenido -->
+    <div class="flex flex-1">
+      <!-- Sidebar Component -->
+      <app-sidebar></app-sidebar>
+  
+      <!-- Contenido principal -->
+      <div class="flex-1 p-6">
+        <h1 class="text-2xl font-bold mb-4">Empleados</h1>
+  
+        <!-- Filtros -->
+        <div class="flex items-center mb-4 space-x-2">
+    
+          <span>Filtrar:</span>
+          <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+              Activo
+          </button>
+          <button class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+            Inactivo
+          </button>
+          <div class="bg-[#7E493B] text-white px-2.5 py-1.5 border rounded-lg cursor-pointer">
+            Todo
+          </div>
+        </div>
+  
+  
+        <!-- Contenedor de buscador y botón alineados a la derecha -->
+        <div class="flex flex-col items-end mb-4">
+          <!-- Buscador -->
+          <div class="relative mb-2 max-w-xs w-full">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              class="w-full p-2 pl-3 pr-10 border rounded-xl bg-[#D9D9D9]"
+            />
+            <span
+              class="absolute right-3 top-2 material-icons text-gray-600 cursor-pointer"
+              >search</span
+            >
+          </div>
+          <button class="bg-[#7E493B] text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
+            Agregar<span class="material-icons ml-2"
+              routerLink="/employees/create"
+            >add</span>
+          </button>
+        </div>
+  
+        <!-- Tabla de productos -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-black">
+            <thead>
+              <tr class="bg-[#7E493B] text-white">
+                <th class="p-2 border">Id</th>
+                <th class="p-2 border">Nombres</th>
+                <th class="p-2 border">A. Paterno</th>
+                <th class="p-2 border">A. Materno</th>
+                <th class="p-2 border">Movil</th>
+                <th class="p-2 border">Correo</th>
+                <th class="p-2 border">cargo</th>
+                <th class="p-2 border">editar</th>
+                <th class="p-2 border">cliente Activo</th>                
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center border">
+                <td class="p-2 border">1</td>
+                <td class="p-2 border">Juan Pablo</td>
+                <td class="p-2 border">Perez</td>
+                <td class="p-2 border">Escobar</td>
+                <td class="p-2 border text-blue-600 underline">999 363 733</td>
+                <td class="p-2 border">jdiejdieijd&#64;gmail.com</td>
+                <td class="p-2 border">vendedor</td>
+                <td class="p-2 border"><span class="material-icons text-[#7E493B] cursor-pointer">edit</span></td>
+                <td class="p-2 border"><span class="material-icons text-green-500 cursor-pointer">visibility</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

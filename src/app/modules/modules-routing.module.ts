@@ -14,6 +14,11 @@ import { BannerUpdateComponent } from './banner-update/banner-update.component';
 import { ComprobantesComponent } from './comprobantes/comprobantes.component';
 import { ReportComponent } from './report/report.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CustomersComponent } from './customers/customers.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { CreateDeliveryComponent } from './create-delivery/create-delivery.component';
+import { UserComponent } from './user/user.component';
+import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.component';
 
 const routes: Routes = [
     {
@@ -71,6 +76,26 @@ const routes: Routes = [
     {
       path: 'calendar',
       component: CalendarComponent,
+    },
+    {
+      path: 'customers',
+      component: CustomersComponent,
+    },
+    {
+      path: 'employees',
+      component: DeliveryComponent,
+    },
+    {
+      path: 'employees/create',
+      component: CreateDeliveryComponent,
+    },
+    {
+      path: 'user',
+      component: UserComponent
+    },
+    {
+      path: 'pos',
+      component: PosIndexSelesComponent
     }
 ];
 
