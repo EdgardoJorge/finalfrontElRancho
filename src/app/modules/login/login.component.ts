@@ -27,9 +27,10 @@ export class LoginComponent {
     this.authService.login(request).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        let timerInterval;
         Swal.fire({
           title:"Inicio de sesion satisfactorio",
-          text: "Rediriiendo a la pagina principal",
+          text: "Redirigiendo a la pagina principal",
           icon: "success"
         });
         //alert('Inicio de sesión exitoso');

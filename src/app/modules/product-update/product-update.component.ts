@@ -4,6 +4,10 @@ import { ProductService } from '../../service/services/product.service';
 import { Producto } from '../../service/models/ProductModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CategoryService } from '../../service/services/category.service';
+import { Categoria } from '../../service/models/CategoryModel';
+import { ImagenService } from '../../service/services/imagen.service';
+import { Imagen } from '../../service/models/ImagenModel';
 
 @Component({
   selector: 'app-product-update',
@@ -12,23 +16,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./product-update.component.css']
 })
 export class ProductUpdateComponent implements OnInit {
+onImageSelected($event: Event,arg1: number) {
+throw new Error('Method not implemented.');
+}
   productoForm!: FormGroup;
   producto: Producto | null = null;
-
-  imagen1: File | null = null;
-  imagen2: File | null = null;
-
-  imagenUrl1: string = '';
-  imagenUrl2: string = '';
-
-  categorias = [
-    { id: 1, nombre: 'Carnes' },
-    { id: 2, nombre: 'Bebidas' },
-    { id: 3, nombre: 'Postres' }
-  ];
+  productId: number = 0;
+  loading = false;
+  
+  // Manejo de categorías
+  categorias: Categoria[] = [];
+  
+  // Manejo de imágenes existentes
+  imagenesExistentes: Imagen[] = [];
+  
+  // Nuevas imágenes seleccionadas
+  imagen1File: File | null = null;
+  imagen2File: File | null = null;
+  
+  // URLs para preview
+  imagen1Preview: string = '';
+  imagen2Preview: string = '';
+  
+  // Control de imágenes que se van a eliminar
+  imagenesAEliminar: Imagen[] = [];
 
   constructor(
     private productoService: ProductService,
+    private categoryService: CategoryService,
+    private imagenService: ImagenService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
@@ -36,86 +52,221 @@ export class ProductUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initForm();
+    this.loadCategories();
+    
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.productId = +id;
+      this.obtenerProducto(id);
+      this.cargarImagenesExistentes(+id);
+    }
+  }
+
+  initForm(): void {
     this.productoForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: ['', [Validators.required, Validators.min(0)]],
-      precioOferta: ['', [Validators.min(0)]],
-      categoria: [null, Validators.required],
-      activo: [true, Validators.required]
+      precio: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      precioOferta: [''],
+      categoriaId: [null, Validators.required]
     });
+  }
 
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.obtenerProducto(id);
-    }
+  loadCategories(): void {
+    this.categoryService.obtenerCategorias().subscribe({
+      next: (data) => {
+        this.categorias = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar categorías:', error);
+        this.snackBar.open('Error al cargar las categorías', 'Cerrar', { duration: 3000 });
+      }
+    });
   }
 
   obtenerProducto(id: string): void {
-    this.productoService.obtenerProductoPorId(+id).subscribe(producto => {
-      this.producto = producto;
-      this.productoForm.patchValue(producto);
-      this.imagenUrl1 = producto.imagen || '';
+    this.productoService.obtenerProductoPorId(+id).subscribe({
+      next: (producto) => {
+        this.producto = producto;
+        // Solo llenar los campos del producto (sin imagen)
+        this.productoForm.patchValue({
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precio: producto.precio,
+          precioOferta: producto.precio_Oferta,
+          categoriaId: producto.idCategoria
+        });
+      },
+      error: (error) => {
+        console.error('Error al obtener producto:', error);
+        this.snackBar.open('Error al cargar el producto', 'Cerrar', { duration: 3000 });
+      }
     });
   }
 
-  onImageSelected(event: any, imagenNumero: number): void {
-    const file = event.target.files[0];
-    if (file) {
-      if (imagenNumero === 1) {
-        this.imagen1 = file;
-        this.subirImagen(file, 1);
-      } else {
-        this.imagen2 = file;
-        this.subirImagen(file, 2);
-      }
-    }
-  }
-
-  subirImagen(file: File, imagenNumero: number): void {
-    this.productoService.subirImagen(file).subscribe({
-      next: (response: any) => {
-        const url = response.data?.url;
-        if (imagenNumero === 1) {
-          this.imagenUrl1 = url;
-        } else {
-          this.imagenUrl2 = url;
+  cargarImagenesExistentes(productId: number): void {
+    this.imagenService.getByProductId(productId).subscribe({
+      next: (imagenes) => {
+        this.imagenesExistentes = imagenes;
+        // Asignar las primeras dos imágenes a las previews
+        if (imagenes.length > 0) {
+          this.imagen1Preview = imagenes[0].imagenes;
+        }
+        if (imagenes.length > 1) {
+          this.imagen2Preview = imagenes[1].imagenes;
         }
       },
-      error: err => {
-        console.error('Error al subir imagen a ImgBB', err);
-        this.snackBar.open('Error al subir imagen', 'Cerrar', { duration: 3000 });
+      error: (error) => {
+        console.error('Error al cargar imágenes:', error);
       }
     });
   }
 
-  actualizarProducto(): void {
-    if (this.productoForm.valid && this.producto) {
+  onFileChange(event: any, imageNumber: number): void {
+    const file = event.target.files?.[0];
+    
+    if (file) {
+      // Validar tipo de archivo
+      if (!file.type.startsWith('image/')) {
+        this.snackBar.open('Por favor seleccione solo archivos de imagen', 'Cerrar', { duration: 3000 });
+        return;
+      }
+      
+      // Validar tamaño (máximo 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        this.snackBar.open('La imagen debe ser menor a 5MB', 'Cerrar', { duration: 3000 });
+        return;
+      }
+
+      // Asignar el archivo y crear preview
+      if (imageNumber === 1) {
+        this.imagen1File = file;
+        this.imagen1Preview = URL.createObjectURL(file);
+        // Marcar imagen existente para eliminar si existe
+        if (this.imagenesExistentes.length > 0) {
+          this.marcarImagenParaEliminar(this.imagenesExistentes[0]);
+        }
+      } else if (imageNumber === 2) {
+        this.imagen2File = file;
+        this.imagen2Preview = URL.createObjectURL(file);
+        // Marcar imagen existente para eliminar si existe
+        if (this.imagenesExistentes.length > 1) {
+          this.marcarImagenParaEliminar(this.imagenesExistentes[1]);
+        }
+      }
+    }
+  }
+
+  marcarImagenParaEliminar(imagen: Imagen): void {
+    if (!this.imagenesAEliminar.some(img => img.id === imagen.id)) {
+      this.imagenesAEliminar.push(imagen);
+    }
+  }
+
+  removerImagen(imageNumber: number): void {
+    if (imageNumber === 1) {
+      this.imagen1File = null;
+      this.imagen1Preview = '';
+      // Si había una imagen existente, quitarla de la lista de eliminación
+      if (this.imagenesExistentes.length > 0) {
+        this.imagenesAEliminar = this.imagenesAEliminar.filter(
+          img => img.id !== this.imagenesExistentes[0].id
+        );
+      }
+    } else if (imageNumber === 2) {
+      this.imagen2File = null;
+      this.imagen2Preview = '';
+      // Si había una imagen existente, quitarla de la lista de eliminación
+      if (this.imagenesExistentes.length > 1) {
+        this.imagenesAEliminar = this.imagenesAEliminar.filter(
+          img => img.id !== this.imagenesExistentes[1].id
+        );
+      }
+    }
+  }
+
+  async actualizarProducto(): Promise<void> {
+    if (!this.productoForm.valid || !this.producto || this.loading) {
+      this.snackBar.open('Formulario inválido. Revisa los campos.', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
+    this.loading = true;
+
+    try {
+      // 1. Actualizar solo los datos del producto (sin imágenes)
       const updatedProduct: Producto = {
         ...this.producto,
-        ...this.productoForm.value,
-        imagen: this.imagenUrl1 || this.producto.imagen
+        nombre: this.productoForm.value.nombre,
+        descripcion: this.productoForm.value.descripcion,
+        precio: this.productoForm.value.precio,
+        precio_Oferta: this.productoForm.value.precioOferta,
+        idCategoria: this.productoForm.value.idCategoria,
       };
 
-      const id = this.route.snapshot.paramMap.get('id');
-      if (id) {
-        this.productoService.actualizarProducto(+id, updatedProduct).subscribe({
-          next: () => {
-            this.snackBar.open('Producto actualizado correctamente', 'Cerrar', { duration: 3000 });
-            this.router.navigate(['/products']);
-          },
-          error: err => {
-            console.error('Error al actualizar producto', err);
-            this.snackBar.open('Error al actualizar el producto', 'Cerrar', { duration: 3000 });
-          }
-        });
+      await this.productoService.actualizarProducto(this.productId, updatedProduct).toPromise();
+
+      // 2. Eliminar imágenes marcadas para eliminación
+      for (const imagen of this.imagenesAEliminar) {
+        await this.imagenService.delete(imagen.id, imagen.imagenes);
       }
-    } else {
-      this.snackBar.open('Formulario inválido. Revisa los campos.', 'Cerrar', { duration: 3000 });
+
+      // 3. Subir nuevas imágenes
+      await this.subirNuevasImagenes();
+
+      this.snackBar.open('Producto actualizado correctamente', 'Cerrar', { duration: 3000 });
+      
+      setTimeout(() => {
+        this.router.navigate(['/productos']);
+      }, 1500);
+
+    } catch (error) {
+      console.error('Error al actualizar producto:', error);
+      this.snackBar.open('Error al actualizar el producto', 'Cerrar', { duration: 3000 });
+    } finally {
+      this.loading = false;
     }
+  }
+
+  private async subirNuevasImagenes(): Promise<void> {
+    const uploadPromises: Promise<Imagen>[] = [];
+
+    // Subir nueva imagen 1 si existe
+    if (this.imagen1File) {
+      uploadPromises.push(
+        this.imagenService.create(this.imagen1File, this.productId)
+      );
+    }
+
+    // Subir nueva imagen 2 si existe
+    if (this.imagen2File) {
+      uploadPromises.push(
+        this.imagenService.create(this.imagen2File, this.productId)
+      );
+    }
+
+    if (uploadPromises.length > 0) {
+      await Promise.all(uploadPromises);
+    }
+  }
+
+  // Método para obtener preview de imagen (para el template)
+  getImagePreview(file: File): string {
+    return URL.createObjectURL(file);
   }
 
   cancelar(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/productos']);
+  }
+
+  // Limpiar URLs de objeto cuando el componente se destruye
+  ngOnDestroy(): void {
+    if (this.imagen1Preview && this.imagen1File) {
+      URL.revokeObjectURL(this.imagen1Preview);
+    }
+    if (this.imagen2Preview && this.imagen2File) {
+      URL.revokeObjectURL(this.imagen2Preview);
+    }
   }
 }

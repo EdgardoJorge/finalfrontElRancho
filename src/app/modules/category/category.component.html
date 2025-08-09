@@ -26,18 +26,19 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Recorremos las categorías dinámicamente -->
-        <tr *ngFor="let categoria of categorias" class="border-b">
-          <td class="p-2">{{ categoria.categoriaNombre }}</td>
+        @for (item of category; track $index) {
+        <tr>
+          <td class="p-2">{{ item.categoriaNombre }}</td>
           <td class="p-2">
-            <img [src]="categoria.imagen" [alt]="categoria.categoriaNombre" class="h-16" />
+            <img [src]="item.imagen" [alt]="item.categoriaNombre" class="h-16" />
           </td>
           <td class="p-2">
             <span class="material-icons cursor-pointer"
-            [routerLink]="['/category/update', categoria.id]"
+            [routerLink]="['/category/update', item.id]"
             >edit</span>
           </td>
         </tr>
+        }
         </tbody>
       </table>
 

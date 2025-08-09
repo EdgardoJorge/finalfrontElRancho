@@ -4,47 +4,41 @@
         <app-sidebar></app-sidebar>
         <div class="flex-1 p-6">
             <h1 class="text-2xl font-bold mb-4">Punto de Venta</h1>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="md:col-span-2">
-                    <h2 class="text-xl font-semibold mb-2">Productos</h2>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="bg-gray-400 p-6 rounded-lg w-full min-h-[300px]">
-                            <p>Producto</p>
-                            <input type="text" name="productos"
-                                class="bg-white border border-black rounded-md mt-1 w-full"
-                                placeholder="ingrese el nombre del producto">
-                            <div class="flex flex-col sm:flex-row gap-4 mt-4">
-                                <div class="flex-1">
-                                    <p>Cantidad</p>
-                                    <input type="number" name="cantidad"
-                                        class="bg-white border border-black rounded-md mt-1 w-full">
-                                </div>
-                                <div class="flex-1">
-                                    <p>Cupones</p>
-                                    <input type="text" name="Cupones"
-                                        class="bg-white border border-black rounded-md mt-1 w-full">
-                                </div>
+            <div class="flex flex-row p-4">
+                <div class="flex-1 mr-2 bg-[#adb5bd]">
+                    <p class="p-4">Categorias</p>
+                    <div class="flex flex-row justify-evenly mb-4">
+                        <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 hover:bg-white hover:text-black hover:border-[#7E493B]">Plato fuerte</button>
+                        <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 hover:bg-white hover:text-black hover:border-[#7E493B]">Bebidas</button>
+                        <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 hover:bg-white hover:text-black hover:border-[#7E493B]">Postres</button>
+                        <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 hover:bg-white hover:text-black hover:border-[#7E493B]">Entradas</button>
+                        <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 hover:bg-white hover:text-black hover:border-[#7E493B]">Extras</button>
+                    </div>
+                    <p class="pl-4">Productos por nombre</p>
+                    <div class="relative p-2">
+                        <input type="text" placeholder="Productos..."
+                            class="p-2 border rounded w-full text-black pr-12 bg-[#D9D9D9]" />
+                        <button type="button"
+                            class="absolute top-1/2 right-2 -translate-y-1/2 h-8 w-8 flex items-center justify-center bg-[#7E493B] rounded-full aspect-square p-0">
+                            <span class="material-icons text-gray-100">search</span>
+                        </button>
+                    </div>
+                    <div class="flex flex-row pb-4 ">
+                        <div class="bg-white rounded-lg p-2 ml-3">
+                            <img src="assets/test/pachamanca.jpg" alt="producto">
+                            <p class="font-semibold mt-2">Pachamanca de pollo</p>
+                            <p class="font-medium">Precio unitario:</p>
+                            <p>S/.20</p>
+                            <p class="font-medium mt-1.5">cantidad:</p>
+                            <input type="text" name="cantidad" id="" class="border border-black rounded-lg w-full" placeholder="ingrese la cantidad">
+                            <div class="w-full flex justify-center mt-2">
+                                <button class="bg-[#7E493B] border border-black rounded-md text-white p-2 px-4 hover:bg-white hover:text-black hover:border-[#7E493B]">+ Añadir</button>
                             </div>
-                            <p>Cliente</p>
-                            <select name="" id="" class="w-full bg-white border border-black rounded-md">
-                                <option value="Dni">DNI</option>
-                                <option value="Ruc">RUC</option>
-                                <option value="Comun">Comun</option>
-                            </select>
-                            <p>Monto pagado</p>
-                            <input type="text" name="monto" id="" class="w-full bg-white border border-black rounded-md">
-
                         </div>
                     </div>
                 </div>
-                <div class="border rounded p-4">
-                    <h2 class="text-xl font-semibold mb-2">Carrito</h2>
-                    <ul>
-                        <!-- Aquí iría la lista del carrito -->
-                    </ul>
-                    <div class="mt-4 font-bold text-lg">Total: S/ 0.00</div>
-                    <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Finalizar
-                        Venta</button>
+                <div class="flex-1 ml-2 bg-[#adb5bd]">
+                    <!-- Contenido del segundo div -->
                 </div>
             </div>
         </div>

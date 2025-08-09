@@ -38,7 +38,6 @@ import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.compon
         SidebarComponent,
         NavbarComponent,
         ProductsComponent,
-        ProductCreateComponent,
         ProductUpdateComponent,
         CategoryComponent,
         CategoryCreateComponent,
@@ -55,6 +54,7 @@ import { PosIndexSelesComponent } from './pos-index-seles/pos-index-seles.compon
         UserComponent,
         UserCreateComponent,
         PosIndexSelesComponent,
+        ProductCreateComponent,
     ],
     exports: [
         NavbarComponent,

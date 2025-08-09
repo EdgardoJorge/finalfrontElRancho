@@ -9,23 +9,24 @@ import {Categoria} from '../../service/models/CategoryModel';
   styleUrl: './category.component.css'
 })
 export class CategoryComponent implements OnInit {
-  categorias: Categoria[] = [];
-
-  constructor(private categoryService: CategoryService) {}
-
+  enum : 'none' | 'loading' | 'done' | 'error' = 'none'
+  category: Categoria[] = [];
+  constructor(
+    private _category_Service: CategoryService,
+  ){}
   ngOnInit(): void {
-    this.cargarCategorias();
+    this.vercategory()
   }
-
-  cargarCategorias(): void {
-    this.categoryService.obtenerCategorias().subscribe({
+  vercategory(){
+    this.enum = 'loading';
+    this._category_Service.obtenerCategorias().subscribe({
       next: (data) => {
-        console.log('Datos recibidos:', data); // 👈 Agrega esto
-        this.categorias = data;
+        this.enum = 'done';
+        this.category = data;
       },
-      error: (err) => {
-        console.error('Error al obtener categorías', err);
+      error(err){
+        console.log(err)
       }
-    });
+    })
   }
 }
